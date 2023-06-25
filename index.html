@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Note and Interval</title>
+  <script>
+    // Define arrays of notes and interval names
+    var notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    var intervals = ['Unison', 'Minor 2nd', 'Major 2nd', 'Minor 3rd', 'Major 3rd', 'Perfect 4th', 'Augmented 4th/Diminished 5th', 'Perfect 5th', 'Minor 6th', 'Major 6th', 'Minor 7th', 'Major 7th', 'Octave'];
+
+    var timerId; // To store the timer ID
+    var audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Create an AudioContext instance
+    var oscillator;
+    var gainNode;
+
+    // Function to generate a random note
+    function generateRandomNote() {
+      var randomIndex = Math.floor(Math.random() * notes.length);
+      return notes[randomIndex];
+    }
+
+    // Function to generate a random interval
+    function generateRandomInterval() {
+      var randomIndex = Math.floor(Math.random() * intervals.length);
+      return intervals[randomIndex];
+    }
+
+    // Function to generate a random note and interval
+    function generateRandomNoteAndInterval() {
+      var noteElement = document.getElementById('note');
+      var intervalElement = document.getElementById('interval');
+
+      var randomNote = generateRandomNote();
+      var randomInterval = generateRandomInterval();
+
+      noteElement.textContent = 'Random Note: <h2>' + randomNote + '</h2>';
+      intervalElement.textContent = 'Random Interval: <h2>' + randomInterval + '</h2>;
+    }
+
+    // Function to play the beep sound for a specific duration
+    function playBeep() {
+      oscillator = audioContext.createOscillator();
+      gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      // Adjust the volume (gain)
+      var volume = parseFloat(document.getElementById('volume').value);
+      gainNode.gain.value = volume;
+
+      oscillator.start();
+
+      // Stop the beep after 0.5 seconds
+      setTimeout(function() {
+        stopBeep();
+      }, 500);
+    }
+
+    // Function to stop the beep sound
+    function stopBeep() {
+      oscillator.stop();
+    }
+
+    // Function to start the timer
+    function startTimer() {
+      var seconds = parseInt(document.getElementById('time').value);
+
+      // Clear any existing timer
+      clearTimeout(timerId);
+
+      // Generate a random note and interval immediately
+      generateRandomNoteAndInterval();
+
+      // Generate a new random note and interval after the specified time
+      timerId = setInterval(function() {
+        var countdownElement = document.getElementById('countdown');
+        countdownElement.textContent = seconds; // Display the countdown as a number
+
+        if (seconds <= 0) {
+          generateRandomNoteAndInterval();
+          playBeep(); // Play the beep sound for 0.5 seconds
+          seconds = parseInt(document.getElementById('time').value); // Reset the countdown
+        } else {
+          seconds--;
+        }
+      }, 1000);
+    }
+
+    // Function to stop the timer
+    function stopTimer() {
+      clearTimeout(timerId);
+      var countdownElement = document.getElementById('countdown');
+      countdownElement.textContent = ''; // Clear the countdown
+      stopBeep(); // Stop the beep sound
+    }
+  </script>
+</head>
+<body>
+  <h1>Random Note and Interval Generator</h1>
+  <label for="time">Set Time (seconds):</label>
+  <input type="number" id="time" value="5" min="1" max="10">
+  <br>
+  <label for="volume">Volume:</label>
+  <input type="range" id="volume" value="0.5" min="0" max="1" step="0.01">
+  <br>
+  <button onclick="startTimer()">Start Timer</button>
+  <button onclick="stopTimer()">Stop Timer</button>
+  <br>
+  <p id="note"></p>
+  <p id="interval"></p>
+  <p id="countdown"></p> <!-- Display the countdown as a number -->
+</body>
+</html>
