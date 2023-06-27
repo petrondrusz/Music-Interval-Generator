@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Random Note and Interval</title>
+  <title>Random Note and Interval Generator</title>
   <script>
     // Define arrays of notes and interval names
     var notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    var intervals = ['Unison', 'Minor 2nd', 'Major 2nd', 'Minor 3rd', 'Major 3rd', 'Perfect 4th', 'Augmented 4th/Diminished 5th', 'Perfect 5th', 'Minor 6th', 'Major 6th', 'Minor 7th', 'Major 7th', 'Octave'];
+    var intervals = ['Unison', 'Minor 2nd', 'Major 2nd', 'Minor 3rd', 'Major 3rd', 'Perfect 4th', 'Augmented 4th / Diminished 5th', 'Perfect 5th', 'Minor 6th', 'Major 6th', 'Minor 7th', 'Major 7th', 'Octave'];
 
     var timerId; // To store the timer ID
     var audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Create an AudioContext instance
@@ -53,7 +53,7 @@
       // Stop the beep after 0.5 seconds
       setTimeout(function() {
         stopBeep();
-      }, 500);
+      }, 300);
     }
 
     // Function to stop the beep sound
@@ -97,11 +97,9 @@
 </head>
 <body style="font-family: 'TT Travels';">
   <div style="text-align: center; font-family: 'TT Travels';">
-  <h1 style="margin: 60px 0 60px 0;">Random Note and Interval Generator</h1>
   
-  <hr style="margin: 24px 0 0 0;">
-  <h2 id="note" style="color: #ED1846; font-size: 120px; margin: 0 0 0 0; padding: 48px 0 16px 0; border: 0px solid red;"></h2>
-  <h3 id="interval" style="font-size: 36px;"></h3>
+  <h1 id="note" style="color: #ED1846; font-size: 200px; margin: 0 0 0 0; padding: 48px 0 16px 0; border: 0px solid red;"></h1>
+  <h2 id="interval" style="font-size: 60px;"></h2>
   <hr style="margin: 0 0 24px 0;">
 
   <p style="font-size: 32px; padding: 32px 0 0 0;" id="countdown"></p> <!-- Display the countdown as a number -->
@@ -116,6 +114,10 @@
 
   <label style="font-size: 18px; padding: 8px;" for="volume">Beep Volume</label>
   <input style="-webkit-appearance: none; background-color: #F1F1F1; width: 200px; height: 20px; border-radius: 24px; display: block; margin: 8px auto 0 auto;" type="range" id="volume" value="0.15" min="0" max="1" step="0.01">
+
+  <div style="display: block; margin: 32px 0 0 0;">
+    <p style="font-size: 16px">Random Note and Interval Generator<br />Feel free to use it</p>
+  </div>
 
   </div>
 </body>
