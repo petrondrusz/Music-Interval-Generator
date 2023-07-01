@@ -5,7 +5,7 @@
   <script>
     // Define arrays of notes and interval names
     var notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    var intervals = ['Unison', 'Minor 2nd', 'Major 2nd', 'Minor 3rd', 'Major 3rd', 'Perfect 4th', 'Augmented 4th / Diminished 5th', 'Perfect 5th', 'Minor 6th', 'Major 6th', 'Minor 7th', 'Major 7th', 'Octave'];
+    var intervals = ['Minor 2nd', 'Major 2nd', 'Minor 3rd', 'Major 3rd', 'Perfect 4th', 'Augmented 4th / Diminished 5th', 'Perfect 5th', 'Minor 6th', 'Major 6th', 'Minor 7th', 'Major 7th', 'Octave'];
 
     var timerId; // To store the timer ID
     var audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Create an AudioContext instance
@@ -116,7 +116,7 @@
   <input style="-webkit-appearance: none; background-color: #F1F1F1; width: 200px; height: 20px; border-radius: 24px; display: block; margin: 8px auto 0 auto;" type="range" id="volume" value="0.15" min="0" max="1" step="0.01">
 
   <div style="display: block; margin: 64px 0 0 0;">
-    <p style="font-size: 16px">Random Note and Interval Generator<br />Feel free to use it</p>
+    <p style="font-size: 16px; line-height: 130%;">Random Note and Interval Generator<br />Feel free to use it</p>
   </div>
 
   </div>
